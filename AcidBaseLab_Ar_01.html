@@ -1,4 +1,4 @@
-s110
+s120
 [[iframe width="100%" height="950px" scrolling="true"]]
 
 <!-- CSS Styling -->
@@ -197,7 +197,7 @@ processHtmlClass: 'tex2jax_process'
 [[script type="module"]]
 // 1. Import STACK-JS securely
 import {stack_js} from '[[cors src="stackjsiframe.js"/]]';
-
+ stack_js.resize_containing_frame({#width#}, {#height#}); 
 // 2. Setup Interactions for Lab
 const btnInd = document.getElementById('btn-indicator');
 const btnAcid = document.getElementById('btn-acid');
@@ -245,7 +245,6 @@ if(btnAcid) {
 
 // 3. Connect to STACK and handle the Check button
 var promiseforaninput = stack_js.request_access_to_input("ans1", true);
-
 promiseforaninput.then((id) => {
     let stackInput = document.getElementById(id);
 
