@@ -1,0 +1,275 @@
+s100
+<!-- 2. The Sandboxed Iframe for the Chemistry Lab -->
+
+[[iframe width="100%" height="950px" scrolling="true"]]
+
+<!-- CSS Styling -->
+
+[[style]]
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+body { font-family: 'Tajawal', sans-serif; background-color: #fcfdfd; color: #1e293b; direction: rtl; }
+.chart-container { position: relative; width: 100%; height: 300px; }
+
+/* Animation classes */
+.fade-in { animation: fadeIn 0.5s ease-in; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.bubble { 
+    position: absolute; 
+    background: rgba(255, 255, 255, 0.8); 
+    border-radius: 50%; 
+    bottom: 0; 
+    animation: rise 2s infinite ease-in; 
+}
+@keyframes rise { 
+    0% { bottom: 0; transform: translateX(0); opacity: 1; } 
+    100% { bottom: 100%; transform: translateX(-20px); opacity: 0; } 
+}
+
+
+[[/style]]
+
+<!-- External Libraries -->
+
+[[script src="https://cdn.tailwindcss.com"]][[/script]]
+[[script src="https://cdn.jsdelivr.net/npm/chart.js"]][[/script]]
+
+<!-- MathJax Configuration -->
+
+[[script]]
+window.MathJax = {
+tex: {
+inlineMath: [['$', '$'], ['\(', '\)']],
+displayMath: [['
+
+$$', '$$
+
+'], ['
+
+$$', '$$
+
+']],
+processEscapes: true
+},
+options: {
+processHtmlClass: 'tex2jax_process'
+}
+};
+[[/script]]
+[[script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"]][[/script]]
+
+<!-- HTML Body Content -->
+
+<div class="p-6 max-w-5xl mx-auto tex2jax_process" dir="rtl">
+<h1 class="text-2xl font-bold text-center text-indigo-700 mb-6">مختبر الكيمياء التفاعلي: تشخيص المواد حسب التقرير</h1>
+
+<!-- Instructions -->
+<div class="bg-white p-4 rounded-lg shadow mb-6 border-r-4 border-indigo-500">
+    <p class="mb-2 font-medium">بناءً على نتائج التقرير والمحاكاة أدناه، قم بتحديد المواد A, B, C, D من بين الخيارات التالية:</p>
+    <p class="text-sm text-gray-600 mb-4" dir="ltr" style="text-align: right;">(NaCl, NaHCO$_3$, NaHSO$_4$, NaOH)</p>
+</div>
+
+<!-- Interactive Lab Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+    
+    <!-- pH Chart Container -->
+    <div class="bg-white p-4 rounded-lg shadow">
+        <h2 class="text-lg font-semibold mb-2 text-gray-800">نتائج المعايرة (pH)</h2>
+        <div class="chart-container">
+            <canvas id="phChart"></canvas>
+        </div>
+    </div>
+    
+    <!-- Reaction Animation Container -->
+    <div class="bg-white p-4 rounded-lg shadow flex flex-col items-center justify-center">
+        <h2 class="text-lg font-semibold mb-4 text-gray-800">تفاعل إضافة الحمض (HCl)</h2>
+        <div id="reaction-container" class="relative w-32 h-32 bg-blue-100 rounded-full border-4 border-blue-300 overflow-hidden mb-6 shadow-inner">
+            <!-- Bubbles will be injected here by JS -->
+        </div>
+        <button id="btn-react" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full transition-colors shadow-md">
+            إجراء التفاعل واختبار الغاز
+        </button>
+        <p id="reaction-fb" class="mt-4 text-center text-sm font-medium text-indigo-800 min-h-[40px]"></p>
+    </div>
+</div>
+
+<!-- Student Answer Selection UI -->
+<div class="bg-white p-6 rounded-lg shadow mb-6 border-t-4 border-indigo-500">
+    <h2 class="text-xl font-semibold mb-6">حدد المواد المتطابقة مع النتائج:</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div>
+            <label class="block mb-2 font-bold text-gray-700">المادة A</label>
+            <select id="sel-a" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow">
+                <option value="">اختر...</option>
+                <option value="NaCl">NaCl</option>
+                <option value="NaHCO3">NaHCO3</option>
+                <option value="NaHSO4">NaHSO4</option>
+                <option value="NaOH">NaOH</option>
+            </select>
+        </div>
+        <div>
+            <label class="block mb-2 font-bold text-gray-700">المادة B</label>
+            <select id="sel-b" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow">
+                <option value="">اختر...</option>
+                <option value="NaCl">NaCl</option>
+                <option value="NaHCO3">NaHCO3</option>
+                <option value="NaHSO4">NaHSO4</option>
+                <option value="NaOH">NaOH</option>
+            </select>
+        </div>
+        <div>
+            <label class="block mb-2 font-bold text-gray-700">المادة C</label>
+            <select id="sel-c" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow">
+                <option value="">اختر...</option>
+                <option value="NaCl">NaCl</option>
+                <option value="NaHCO3">NaHCO3</option>
+                <option value="NaHSO4">NaHSO4</option>
+                <option value="NaOH">NaOH</option>
+            </select>
+        </div>
+        <div>
+            <label class="block mb-2 font-bold text-gray-700">المادة D</label>
+            <select id="sel-d" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow">
+                <option value="">اختر...</option>
+                <option value="NaCl">NaCl</option>
+                <option value="NaHCO3">NaHCO3</option>
+                <option value="NaHSO4">NaHSO4</option>
+                <option value="NaOH">NaOH</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="mt-8 flex justify-center">
+        <button id="btn-check" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-10 rounded-xl shadow-lg transition-all transform hover:scale-105">
+            التحقق من الإجابات وتسليمها
+        </button>
+    </div>
+    <div id="result-msg" class="mt-4 text-center min-h-[24px]"></div>
+</div>
+
+
+</div>
+
+<!-- Interactive JS & STACK Integration -->
+
+[[script type="module"]]
+// 1. Import STACK-JS securely
+import {stack_js} from '[[cors src="stackjsiframe.js"/]]';
+
+// 2. Setup Chart.js
+const ctx = document.getElementById('phChart');
+if(ctx) {
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['المادة A', 'المادة B', 'المادة C', 'المادة D'],
+            datasets: [{
+                label: 'قيمة pH التقريبية',
+                data: [7, 8.5, 1.5, 13], 
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.6)', 
+                    'rgba(54, 162, 235, 0.6)', 
+                    'rgba(255, 99, 132, 0.6)', 
+                    'rgba(255, 206, 86, 0.6)'  
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1,
+                borderRadius: 4
+            }]
+        },
+        options: {
+            scales: { y: { beginAtZero: true, max: 14 } },
+            responsive: true, 
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
+}
+
+// 3. Reaction Animation Logic
+const btnReact = document.getElementById('btn-react');
+if(btnReact) {
+    btnReact.addEventListener('click', () => {
+        const container = document.getElementById('reaction-container');
+        const fb = document.getElementById('reaction-fb');
+        container.innerHTML = ''; 
+        fb.textContent = "جاري التفاعل...";
+        fb.className = "mt-4 text-center text-sm font-medium text-gray-500 min-h-[40px]";
+        
+        // Create bubbles animation
+        for(let i=0; i<15; i++) {
+            setTimeout(() => {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                bubble.style.width = Math.random() * 15 + 5 + 'px';
+                bubble.style.height = bubble.style.width;
+                bubble.style.left = Math.random() * 80 + 10 + '%';
+                bubble.style.animationDuration = Math.random() * 1 + 1 + 's';
+                container.appendChild(bubble);
+            }, i * 100);
+        }
+
+        // Output MathJax feedback after animation
+        setTimeout(() => {
+            fb.textContent = "النتيجة: انطلاق غاز $CO_2$ في المادة B فقط. المادة D لم تتفاعل.";
+            fb.className = "mt-4 text-center text-sm font-bold text-indigo-800 min-h-[40px] fade-in";
+            if(window.MathJax) {
+                MathJax.typesetPromise([fb]);
+            }
+        }, 1200);
+    });
+}
+
+// 4. Connect to STACK and handle the Check button
+var promiseforaninput = stack_js.request_access_to_input("ans1", true);
+
+promiseforaninput.then((id) => {
+    let stackInput = document.getElementById(id);
+
+    document.getElementById('btn-check').addEventListener('click', function() {
+        const vals = {
+            a: document.getElementById('sel-a').value,
+            b: document.getElementById('sel-b').value,
+            c: document.getElementById('sel-c').value,
+            d: document.getElementById('sel-d').value
+        };
+        
+        const correct = { a: 'NaCl', b: 'NaHCO3', c: 'NaHSO4', d: 'NaOH' };
+        const msg = document.getElementById('result-msg');
+
+        // Guard against empty answers
+        if(!vals.a || !vals.b || !vals.c || !vals.d) {
+            msg.textContent = "⚠️ يرجى اختيار جميع المواد قبل التحقق.";
+            msg.className = "text-orange-600 font-bold mt-4 fade-in text-center";
+            return;
+        }
+
+        // Visual feedback
+        if(vals.a === correct.a && vals.b === correct.b && vals.c === correct.c && vals.d === correct.d) {
+            msg.textContent = "✅ إجابات صحيحة! لقد قمت بتحليل نتائج التقرير بدقة. تم إرسال الإجابة للمنصة.";
+            msg.className = "text-emerald-600 font-bold mt-4 fade-in text-center text-lg";
+        } else {
+            msg.textContent = "❌ هناك خطأ. تذكر: D هي القاعدة الأقوى (أصفر)، و B هي الكربونات التي تطلق الغاز.";
+            msg.className = "text-rose-600 font-bold mt-4 fade-in text-center text-lg";
+        }
+
+        // Send data to STACK Maxima backend
+        // Formatted as a Maxima List e.g., ["NaCl", "NaHCO3", "NaHSO4", "NaOH"]
+        let maximaList = `["${vals.a}", "${vals.b}", "${vals.c}", "${vals.d}"]`;
+        stackInput.value = maximaList;
+        
+        // Force Moodle to recognise the input change
+        stackInput.dispatchEvent(new Event('change'));
+    });
+});
+
+
+[[/script]]
+[[/iframe]]
