@@ -1,148 +1,72 @@
 [[iframe]]
     [[style]]
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
-        
-        .lab-container { 
-            font-family: 'Tajawal', sans-serif; 
-            direction: rtl; 
-            background-color: #fcfdfd; 
-            color: #1e293b; 
-        }
-
-        .beaker { 
-            border: 3px solid #cbd5e1; 
-            border-top: none; 
-            border-bottom-left-radius: 15px; 
-            border-bottom-right-radius: 15px; 
-            background: rgba(255,255,255,0.6); 
-            position: relative; 
-            overflow: hidden; 
-            height: 100px; 
-            width: 70px; 
-            margin: 0 auto; 
-        }
-
-        .liquid { 
-            position: absolute; 
-            bottom: 0; 
-            left: 0; 
-            right: 0; 
-            transition: background-color 1s ease; 
-            height: 60%; 
-        }
-
-        .bubble { 
-            position: absolute; 
-            background: rgba(255,255,255,0.7); 
-            border-radius: 50%; 
-            bottom: 0; 
-            animation: rise 1.5s infinite ease-in; 
-        }
-
-        @keyframes rise { 
-            from { bottom: 0; opacity: 0.7; } 
-            to { bottom: 80%; opacity: 0; } 
-        }
-
-        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .lab-container { font-family: 'Tajawal', sans-serif; direction: rtl; background-color: #fcfdfd; color: #1e293b; }
+        .beaker { border: 3px solid #cbd5e1; border-top: none; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; background: rgba(255,255,255,0.6); position: relative; overflow: hidden; height: 80px; width: 60px; margin: 0 auto; }
+        .liquid { position: absolute; bottom: 0; left: 0; right: 0; transition: background-color 1s ease; height: 60%; }
+        .bubble { position: absolute; background: rgba(255,255,255,0.7); border-radius: 50%; bottom: 0; animation: rise 1.5s infinite ease-in; }
+        @keyframes rise { from { bottom: 0; opacity: 0.7; } to { bottom: 80%; opacity: 0; } }
+        .chart-box { position: relative; height: 180px; width: 100%; }
     [[/style]]
 
     [[script src="https://cdn.tailwindcss.com"]][[/script]]
+    [[script src="https://cdn.jsdelivr.net/npm/chart.js"]][[/script]]
     [[script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"]][[/script]]
 
     <div class="lab-container p-4">
         <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100">
-            <div class="bg-gradient-to-r from-blue-700 to-indigo-800 p-6 text-white text-center">
-                <h1 class="text-2xl font-extrabold mb-1">مختبر الكيمياء التفاعلي</h1>
-                <p class="text-blue-100 text-sm">تشخيص أملاح الصوديوم المجهولة $A, B, C, D$</p>
+            <div class="bg-gradient-to-r from-indigo-700 to-blue-800 p-4 text-white text-center">
+                <h1 class="text-xl font-extrabold">مختبر تحليل المواد (ترتيب عشوائي)</h1>
             </div>
 
             <div class="p-6">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 text-center">
+                <div class="grid grid-cols-4 gap-4 mb-6 text-center">
                     <div class="flex flex-col items-center">
-                        <span class="font-bold mb-2">المادة A</span>
-                        <div class="beaker">
-                            <div id="liquid-a" class="liquid bg-slate-100"></div>
-                            <div id="bubbles-a" class="absolute inset-0 pointer-events-none"></div>
-                        </div>
+                        <span class="text-xs font-bold mb-1">A</span>
+                        <div class="beaker"><div id="liquid-a" class="liquid bg-slate-100"></div><div id="bubbles-a" class="absolute inset-0"></div></div>
                     </div>
                     <div class="flex flex-col items-center">
-                        <span class="font-bold mb-2">المادة B</span>
-                        <div class="beaker">
-                            <div id="liquid-b" class="liquid bg-slate-100"></div>
-                            <div id="bubbles-b" class="absolute inset-0 pointer-events-none"></div>
-                        </div>
+                        <span class="text-xs font-bold mb-1">B</span>
+                        <div class="beaker"><div id="liquid-b" class="liquid bg-slate-100"></div><div id="bubbles-b" class="absolute inset-0"></div></div>
                     </div>
                     <div class="flex flex-col items-center">
-                        <span class="font-bold mb-2">المادة C</span>
-                        <div class="beaker">
-                            <div id="liquid-c" class="liquid bg-slate-100"></div>
-                            <div id="bubbles-c" class="absolute inset-0 pointer-events-none"></div>
-                        </div>
+                        <span class="text-xs font-bold mb-1">C</span>
+                        <div class="beaker"><div id="liquid-c" class="liquid bg-slate-100"></div><div id="bubbles-c" class="absolute inset-0"></div></div>
                     </div>
                     <div class="flex flex-col items-center">
-                        <span class="font-bold mb-2">المادة D</span>
-                        <div class="beaker">
-                            <div id="liquid-d" class="liquid bg-slate-100"></div>
-                            <div id="bubbles-d" class="absolute inset-0 pointer-events-none"></div>
-                        </div>
+                        <span class="text-xs font-bold mb-1">D</span>
+                        <div class="beaker"><div id="liquid-d" class="liquid bg-slate-100"></div><div id="bubbles-d" class="absolute inset-0"></div></div>
                     </div>
                 </div>
 
-                <div class="flex flex-wrap gap-3 justify-center mb-8">
-                    <button id="btn-cabbage" class="bg-purple-600 text-white px-5 py-2 rounded-xl font-bold shadow hover:bg-purple-700 transition">كاشف الملفوف</button>
-                    <button id="btn-acid" class="bg-rose-500 text-white px-5 py-2 rounded-xl font-bold shadow hover:bg-rose-600 transition">إضافة $HNO_3$</button>
-                    <button id="btn-reset" class="bg-slate-200 text-slate-700 px-5 py-2 rounded-xl font-bold hover:bg-slate-300 transition">إعادة ضبط</button>
+                <div class="mb-6 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                    <div class="chart-box"><canvas id="phChart"></canvas></div>
                 </div>
 
-                <div id="feedback-area" class="mb-8 p-4 bg-slate-50 rounded-2xl text-center italic text-sm min-h-[50px] border border-dashed border-slate-300">
-                    استخدم الأزرار أعلاه لبدء التحليل...
+                <div class="flex gap-2 justify-center mb-6">
+                    <button id="btn-cabbage" class="bg-purple-600 text-white px-3 py-2 rounded-lg text-xs font-bold">كاشف الملفوف</button>
+                    <button id="btn-acid" class="bg-rose-500 text-white px-3 py-2 rounded-lg text-xs font-bold">إضافة حمض $HNO_3$</button>
+                    <button id="btn-reset" class="bg-slate-200 text-slate-700 px-3 py-2 rounded-lg text-xs font-bold">إعادة ضبط</button>
                 </div>
 
-                <div class="bg-slate-100 p-5 rounded-2xl border border-slate-200">
-                    <h3 class="text-center font-bold mb-4 text-slate-700">التقرير النهائي للمختبر</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="flex justify-between items-center bg-white p-3 rounded-lg border shadow-sm">
-                            <label class="font-bold">المادة A:</label>
-                            <select id="sel-a" class="border rounded p-1 outline-none focus:ring-2 focus:ring-blue-400">
-                                <option value="">-- اختر --</option>
-                                <option value="NaCl">NaCl</option>
-                                <option value="NaOH">NaOH</option>
-                                <option value="NaHCO3">NaHCO3</option>
-                                <option value="NaHSO4">NaHSO4</option>
-                            </select>
-                        </div>
-                        <div class="flex justify-between items-center bg-white p-3 rounded-lg border shadow-sm">
-                            <label class="font-bold">المادة B:</label>
-                            <select id="sel-b" class="border rounded p-1 outline-none focus:ring-2 focus:ring-blue-400">
-                                <option value="">-- اختر --</option>
-                                <option value="NaCl">NaCl</option>
-                                <option value="NaOH">NaOH</option>
-                                <option value="NaHCO3">NaHCO3</option>
-                                <option value="NaHSO4">NaHSO4</option>
-                            </select>
-                        </div>
-                        <div class="flex justify-between items-center bg-white p-3 rounded-lg border shadow-sm">
-                            <label class="font-bold">المادة C:</label>
-                            <select id="sel-c" class="border rounded p-1 outline-none focus:ring-2 focus:ring-blue-400">
-                                <option value="">-- اختر --</option>
-                                <option value="NaCl">NaCl</option>
-                                <option value="NaOH">NaOH</option>
-                                <option value="NaHCO3">NaHCO3</option>
-                                <option value="NaHSO4">NaHSO4</option>
-                            </select>
-                        </div>
-                        <div class="flex justify-between items-center bg-white p-3 rounded-lg border shadow-sm">
-                            <label class="font-bold">المادة D:</label>
-                            <select id="sel-d" class="border rounded p-1 outline-none focus:ring-2 focus:ring-blue-400">
-                                <option value="">-- اختر --</option>
-                                <option value="NaCl">NaCl</option>
-                                <option value="NaOH">NaOH</option>
-                                <option value="NaHCO3">NaHCO3</option>
-                                <option value="NaHSO4">NaHSO4</option>
-                            </select>
-                        </div>
+                <div id="feedback-area" class="mb-6 p-3 bg-blue-50 text-blue-800 rounded-lg text-center italic text-xs min-h-[40px]"></div>
+
+                <div class="grid grid-cols-2 gap-3 text-xs bg-slate-100 p-4 rounded-xl">
+                    <div class="flex justify-between items-center bg-white p-2 rounded border">
+                        <label>المادة A:</label>
+                        <select id="sel-a" class="border rounded"><option value="">--</option><option value="NaCl">NaCl</option><option value="NaOH">NaOH</option><option value="NaHCO3">NaHCO3</option><option value="NaHSO4">NaHSO4</option></select>
+                    </div>
+                    <div class="flex justify-between items-center bg-white p-2 rounded border">
+                        <label>المادة B:</label>
+                        <select id="sel-b" class="border rounded"><option value="">--</option><option value="NaCl">NaCl</option><option value="NaOH">NaOH</option><option value="NaHCO3">NaHCO3</option><option value="NaHSO4">NaHSO4</option></select>
+                    </div>
+                    <div class="flex justify-between items-center bg-white p-2 rounded border">
+                        <label>المادة C:</label>
+                        <select id="sel-c" class="border rounded"><option value="">--</option><option value="NaCl">NaCl</option><option value="NaOH">NaOH</option><option value="NaHCO3">NaHCO3</option><option value="NaHSO4">NaHSO4</option></select>
+                    </div>
+                    <div class="flex justify-between items-center bg-white p-2 rounded border">
+                        <label>المادة D:</label>
+                        <select id="sel-d" class="border rounded"><option value="">--</option><option value="NaCl">NaCl</option><option value="NaOH">NaOH</option><option value="NaHCO3">NaHCO3</option><option value="NaHSO4">NaHSO4</option></select>
                     </div>
                 </div>
             </div>
@@ -151,68 +75,80 @@
 
     [[script type="module"]]
         import { stack_js } from '[[cors src="stackjsiframe.js"/]]';
-
         const promiseInput = stack_js.request_access_to_input("ans1", true);
 
-        const colors = { 
-            neutral: '#e2e8f0', c_purple: '#9333ea', 
-            c_green: '#22c55e', c_red: '#ef4444', c_yellow: '#eab308' 
+        // Fetch the randomized values from Maxima
+        const layout = {
+            a: "[[[vx ta/]]]",
+            b: "[[[vx tb/]]]",
+            c: "[[[vx tc/]]]",
+            d: "[[[vx td/]]]"
         };
 
-        function syncToMoodle() {
-            const vals = [
-                document.getElementById('sel-a').value,
-                document.getElementById('sel-b').value,
-                document.getElementById('sel-c').value,
-                document.getElementById('sel-d').value
-            ];
-            
-            // Format as a Maxima list string
-            const maximaString = '["' + vals.join('","') + '"]';
+        const chemData = {
+            "NaCl":   { ph: 7,  color: '#9333ea', bubbles: false },
+            "NaOH":   { ph: 14, color: '#eab308', bubbles: false },
+            "NaHCO3": { ph: 11, color: '#22c55e', bubbles: true },
+            "NaHSO4": { ph: 2,  color: '#ef4444', bubbles: false }
+        };
 
-            promiseInput.then((id) => {
-                const el = document.getElementById(id);
-                if (el) {
-                    el.value = maximaString;
-                    el.dispatchEvent(new Event('change', { bubbles: true }));
-                }
-            });
-        }
+        // Chart Init
+        const ctx = document.getElementById('phChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['A', 'B', 'C', 'D'],
+                datasets: [{ data: [0,0,0,0], backgroundColor: '#cbd5e1' }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { max: 14 } }, plugins: { legend: { display: false } } }
+        });
 
-        // --- Lab Actions ---
         document.getElementById('btn-cabbage').addEventListener('click', () => {
-            document.getElementById('liquid-a').style.backgroundColor = colors.c_purple;
-            document.getElementById('liquid-b').style.backgroundColor = colors.c_green;
-            document.getElementById('liquid-c').style.backgroundColor = colors.c_red;
-            document.getElementById('liquid-d').style.backgroundColor = colors.c_yellow;
-            document.getElementById('feedback-area').textContent = "تغيرت الألوان بناءً على الرقم الهيدروجيني: الأحمر (حمضي جداً)، الأصفر (قاعدي جداً).";
+            const keys = ['a','b','c','d'];
+            const newPh = keys.map(k => chemData[layout[k]].ph);
+            const newColors = keys.map(k => chemData[layout[k]].color);
+            
+            keys.forEach((k, i) => {
+                document.getElementById(`liquid-${k}`).style.backgroundColor = newColors[i];
+            });
+
+            chart.data.datasets[0].data = newPh;
+            chart.data.datasets[0].backgroundColor = newColors;
+            chart.update();
+            document.getElementById('feedback-area').textContent = "تم تحليل الـ pH بناءً على ترتيب المواد العشوائي لهذا النموذج.";
         });
 
         document.getElementById('btn-acid').addEventListener('click', () => {
-            const container = document.getElementById('bubbles-b');
-            container.innerHTML = '';
-            for(let i=0; i<20; i++) {
-                let b = document.createElement('div');
-                b.className = 'bubble';
-                b.style.left = Math.random() * 100 + '%';
-                b.style.width = b.style.height = (Math.random() * 8 + 4) + 'px';
-                b.style.animationDelay = (Math.random() * 1.5) + 's';
-                container.appendChild(b);
-            }
-            document.getElementById('feedback-area').textContent = "حدث تفاعل فوران (انطلاق غاز) في الأنبوب B فقط.";
+            ['a','b','c','d'].forEach(k => {
+                const container = document.getElementById(`bubbles-${k}`);
+                container.innerHTML = '';
+                if(chemData[layout[k]].bubbles) {
+                    for(let i=0; i<15; i++) {
+                        let b = document.createElement('div'); b.className = 'bubble';
+                        b.style.left = Math.random() * 100 + '%'; b.style.animationDelay = Math.random() + 's';
+                        container.appendChild(b);
+                    }
+                }
+            });
+            document.getElementById('feedback-area').textContent = "تفاعل الحمض يظهر فوران الغاز في مادة الكربونات فقط.";
         });
 
         document.getElementById('btn-reset').addEventListener('click', () => {
-            ['a','b','c','d'].forEach(id => {
-                document.getElementById('liquid-'+id).style.backgroundColor = colors.neutral;
-                document.getElementById('bubbles-'+id).innerHTML = '';
+            ['a','b','c','d'].forEach(k => {
+                document.getElementById(`liquid-${k}`).style.backgroundColor = '#e2e8f0';
+                document.getElementById(`bubbles-${k}`).innerHTML = '';
             });
-            document.getElementById('feedback-area').textContent = "تمت إعادة ضبط المختبر.";
+            chart.data.datasets[0].data = [0,0,0,0];
+            chart.update();
         });
 
-        // Event listeners to sync data automatically
-        ['sel-a', 'sel-b', 'sel-c', 'sel-d'].forEach(id => {
-            document.getElementById(id).addEventListener('change', syncToMoodle);
-        });
+        function sync() {
+            const vals = [document.getElementById('sel-a').value, document.getElementById('sel-b').value, document.getElementById('sel-c').value, document.getElementById('sel-d').value];
+            promiseInput.then((id) => {
+                const el = document.getElementById(id);
+                if (el) { el.value = '["' + vals.join('","') + '"]'; el.dispatchEvent(new Event('change', { bubbles: true })); }
+            });
+        }
+        ['sel-a','sel-b','sel-c','sel-d'].forEach(id => document.getElementById(id).addEventListener('change', sync));
     [[/script]]
 [[/iframe]]
