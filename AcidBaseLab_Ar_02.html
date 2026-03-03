@@ -1,14 +1,14 @@
-[iframe width="100%" height="950px" scrolling="true"]]
+[[iframe width="100%" height="950px" scrolling="true"]]
 
 <!-- INJECT MAXIMA VARIABLES HERE INSIDE THE IFRAME -->
 
 <div id="stack-react" style="display:none;">{#react#}</div>
 <div id="stack-correct" style="display:none;">{#correct_ans#}</div>
 
-<!-- CSS Styling -->
+<!-- CSS Styling (Fixed to standard HTML tags) -->
 
-[[style]]
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+<style>
+@import url('https://www.google.com/search?q=https://fonts.googleapis.com/css2%3Ffamily%3DTajawal:wght%40400%3B500%3B700%3B800%26display%3Dswap');
 body { font-family: 'Tajawal', sans-serif; background-color: #fcfdfd; color: #1e293b; direction: rtl; }
 
 /* Animation classes */
@@ -32,21 +32,21 @@ animation: rise 2s infinite ease-in;
 .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 8px;}
 .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-[[/style]]
+</style>
 
-<!-- External Libraries -->
+<!-- External Libraries (Fixed to standard HTML tags) -->
 
-[[script src="https://cdn.tailwindcss.com"]][[/script]]
+<script src="https://www.google.com/search?q=https://cdn.tailwindcss.com"></script>
 
-<!-- MathJax Configuration -->
+<!-- MathJax Configuration (Fixed to standard HTML tags) -->
 
-[[script]]
+<script>
 window.MathJax = {
 tex: {
-inlineMath: [['$', '$'], ['\(', '\)']],
+inlineMath: [['$&#39;, &#39;$'], ['\(', '\)']],
 displayMath: [['
 
-$$', '$$
+$$&#39;, &#39;$$
 
 '], ['
 
@@ -59,8 +59,9 @@ options: {
 processHtmlClass: 'tex2jax_process'
 }
 };
-[[/script]]
-[[script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"]][[/script]]
+</script>
+
+<script src="https://www.google.com/search?q=https://cdn.jsdelivr.net/npm/mathjax%403/es5/tex-mml-chtml.js"></script>
 
 <!-- HTML Body Content -->
 
@@ -204,10 +205,10 @@ processHtmlClass: 'tex2jax_process'
 
 </div>
 
-<!-- Interactive JS & STACK Integration -->
+<!-- Interactive JS & STACK Integration (Fixed to standard HTML tag) -->
 
-[[script type="module"]]
-// 1. Import STACK-JS securely
+<script type="module">
+// 1. Import STACK-JS securely (cors tag is native STACK so it stays as [[cors...]])
 import {stack_js} from '[[cors src="stackjsiframe.js"/]]';
 stack_js.resize_containing_frame({#width#}, {#height#});
 
@@ -219,7 +220,7 @@ if(s.startsWith('[')) s = s.substring(1);
 if(s.endsWith(']')) s = s.substring(0, s.length - 1);
 
 let matches = [];
-let regex = /"([^"]*)"/g; 
+let regex = /&quot;([^&quot;]*)&quot;/g; 
 let match;
 while ((match = regex.exec(s)) !== null) {
     matches.push(match[1]); // extracts content between quotes perfectly
@@ -238,7 +239,7 @@ const materials = parseStackList(rawReact);
 const correctAnswers = parseStackList(rawCorrect);
 
 // 3. Initialize Dynamic UI Elements
-document.getElementById('dynamic-materials-list').innerHTML = ( ${materials.join(' ,  ')} );
+document.getElementById('dynamic-materials-list').innerHTML = ( ${materials.join(&#39; ,  &#39;)} );
 
 // Build Custom Dropdowns (to support MathJax inside options)
 const dropdownContainers = document.getElementById('dropdown-containers');
@@ -246,25 +247,25 @@ const dropdownIds = ['A', 'B', 'C', 'D'];
 
 dropdownIds.forEach(id => {
 const wrapper = document.createElement('div');
-wrapper.innerHTML = <label class="block mb-2 font-bold text-gray-700">المادة ${id}</label> <div class="relative custom-dropdown" id="dropdown-${id.toLowerCase()}" data-value=""> <button class="w-full border border-gray-300 rounded-lg p-3 text-right bg-white focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow flex justify-between items-center dropdown-btn min-h-[50px]"> <span class="selected-text text-gray-500">اختر...</span> <svg class="w-4 h-4 text-gray-400 shrink-0 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg> </button> <div class="absolute z-10 w-full bg-white border border-gray-200 mt-1 rounded-lg shadow-xl hidden dropdown-menu max-h-60 overflow-y-auto custom-scrollbar" dir="ltr"> <!-- Dynamic Options --> </div> </div>;
+wrapper.innerHTML = &lt;label class=&quot;block mb-2 font-bold text-gray-700&quot;&gt;المادة ${id}&lt;/label&gt; &lt;div class=&quot;relative custom-dropdown&quot; id=&quot;dropdown-${id.toLowerCase()}&quot; data-value=&quot;&quot;&gt; &lt;button class=&quot;w-full border border-gray-300 rounded-lg p-3 text-right bg-white focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow flex justify-between items-center dropdown-btn min-h-[50px]&quot;&gt; &lt;span class=&quot;selected-text text-gray-500&quot;&gt;اختر...&lt;/span&gt; &lt;svg class=&quot;w-4 h-4 text-gray-400 shrink-0 mr-2&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M19 9l-7 7-7-7&quot;&gt;&lt;/path&gt;&lt;/svg&gt; &lt;/button&gt; &lt;div class=&quot;absolute z-10 w-full bg-white border border-gray-200 mt-1 rounded-lg shadow-xl hidden dropdown-menu max-h-60 overflow-y-auto custom-scrollbar&quot; dir=&quot;ltr&quot;&gt; &lt;!-- Dynamic Options --&gt; &lt;/div&gt; &lt;/div&gt;;
 dropdownContainers.appendChild(wrapper);
 
 // Populate options
 const container = document.getElementById(`dropdown-${id.toLowerCase()}`);
-const menu = container.querySelector('.dropdown-menu');
-const btn = container.querySelector('.dropdown-btn');
-const selectedText = container.querySelector('.selected-text');
+const menu = container.querySelector(&#39;.dropdown-menu&#39;);
+const btn = container.querySelector(&#39;.dropdown-btn&#39;);
+const selectedText = container.querySelector(&#39;.selected-text&#39;);
 
-materials.forEach(mat => {
-    const item = document.createElement('div');
-    item.className = 'p-3 hover:bg-indigo-50 cursor-pointer text-center transition-colors border-b border-gray-100 last:border-0 font-medium text-gray-800';
+materials.forEach(mat =&gt; {
+    const item = document.createElement(&#39;div&#39;);
+    item.className = &#39;p-3 hover:bg-indigo-50 cursor-pointer text-center transition-colors border-b border-gray-100 last:border-0 font-medium text-gray-800&#39;;
     item.innerHTML = mat; // Inject LaTeX raw
-    item.addEventListener('click', () => {
-        container.setAttribute('data-value', mat);
+    item.addEventListener(&#39;click&#39;, () =&gt; {
+        container.setAttribute(&#39;data-value&#39;, mat);
         selectedText.innerHTML = mat;
-        selectedText.classList.remove('text-gray-500');
-        selectedText.classList.add('text-gray-900');
-        menu.classList.add('hidden');
+        selectedText.classList.remove(&#39;text-gray-500&#39;);
+        selectedText.classList.add(&#39;text-gray-900&#39;);
+        menu.classList.add(&#39;hidden&#39;);
         // Retypeset MathJax dynamically
         if(window.MathJax) MathJax.typesetPromise([selectedText]);
     });
@@ -272,13 +273,13 @@ materials.forEach(mat => {
 });
 
 // Toggle dropdown logic
-btn.addEventListener('click', (e) => {
+btn.addEventListener(&#39;click&#39;, (e) =&gt; {
     e.stopPropagation();
     // Close other menus
-    document.querySelectorAll('.dropdown-menu').forEach(m => {
-        if(m !== menu) m.classList.add('hidden');
+    document.querySelectorAll(&#39;.dropdown-menu&#39;).forEach(m =&gt; {
+        if(m !== menu) m.classList.add(&#39;hidden&#39;);
     });
-    menu.classList.toggle('hidden');
+    menu.classList.toggle(&#39;hidden&#39;);
 });
 
 
@@ -303,16 +304,16 @@ let color = 'bg-purple-600'; // Default Neutral (NaCl, etc.) -> Purple
 let bubbles = false;
 
 // Acid (NaHSO4, HCl, HNO3, etc.)
-if (s.includes('HSO4') || s.includes('HCL') || s.includes('HNO3') || s.includes('H2SO4')) {
-    color = 'bg-red-600'; 
+if (s.includes(&#39;HSO4&#39;) || s.includes(&#39;HCL&#39;) || s.includes(&#39;HNO3&#39;) || s.includes(&#39;H2SO4&#39;)) {
+    color = &#39;bg-red-600&#39;; 
 } 
 // Strong Base (NaOH, KOH, etc.)
-else if (s.includes('NAOH') || s.includes('KOH') || s.includes('LIOH')) {
-    color = 'bg-yellow-400'; 
+else if (s.includes(&#39;NAOH&#39;) || s.includes(&#39;KOH&#39;) || s.includes(&#39;LIOH&#39;)) {
+    color = &#39;bg-yellow-400&#39;; 
 } 
 // Weak Base / Carbonate (NaHCO3, Na2CO3, etc.)
-else if (s.includes('HCO3') || s.includes('CO3')) {
-    color = 'bg-blue-500'; 
+else if (s.includes(&#39;HCO3&#39;) || s.includes(&#39;CO3&#39;)) {
+    color = &#39;bg-blue-500&#39;; 
     bubbles = true;
 }
 return { color, bubbles };
@@ -336,8 +337,8 @@ beakers.forEach((b, i) => {
 document.getElementById(liquid-${b}-ind).className = absolute bottom-0 w-full h-16 transition-colors duration-1000 ${beakerProps[i].color} opacity-90;
 });
 
-    fbInd.textContent = "تمت إضافة الكاشف. لاحظ تغير ألوان المحاليل وقم بمقارنتها مع دليل الـ pH الخاص بالملفوف الأحمر.";
-    fbInd.className = "mt-4 text-center text-sm font-bold text-purple-800 min-h-[40px] fade-in";
+    fbInd.textContent = &quot;تمت إضافة الكاشف. لاحظ تغير ألوان المحاليل وقم بمقارنتها مع دليل الـ pH الخاص بالملفوف الأحمر.&quot;;
+    fbInd.className = &quot;mt-4 text-center text-sm font-bold text-purple-800 min-h-[40px] fade-in&quot;;
 });
 
 
@@ -347,21 +348,21 @@ if(btnAcid) {
 btnAcid.addEventListener('click', () => {
 let bubblingBeakers = [];
 
-    // Apply bubbles dynamically based on Maxima's randomized answers
-    beakers.forEach((b, i) => {
+    // Apply bubbles dynamically based on Maxima&#39;s randomized answers
+    beakers.forEach((b, i) =&gt; {
         const container = document.getElementById(`bubbles-${b}-acid`);
-        container.innerHTML = ''; 
+        container.innerHTML = &#39;&#39;; 
         
         if(beakerProps[i].bubbles) {
             bubblingBeakers.push(b.toUpperCase());
-            for(let j=0; j<20; j++) {
-                setTimeout(() => {
-                    const bubble = document.createElement('div');
-                    bubble.className = 'bubble';
-                    bubble.style.width = Math.random() * 8 + 4 + 'px';
+            for(let j=0; j&lt;20; j++) {
+                setTimeout(() =&gt; {
+                    const bubble = document.createElement(&#39;div&#39;);
+                    bubble.className = &#39;bubble&#39;;
+                    bubble.style.width = Math.random() * 8 + 4 + &#39;px&#39;;
                     bubble.style.height = bubble.style.width;
-                    bubble.style.left = Math.random() * 70 + 15 + '%';
-                    bubble.style.animationDuration = Math.random() * 1 + 1 + 's';
+                    bubble.style.left = Math.random() * 70 + 15 + &#39;%&#39;;
+                    bubble.style.animationDuration = Math.random() * 1 + 1 + &#39;s&#39;;
                     container.appendChild(bubble);
                 }, j * 80);
             }
@@ -369,13 +370,13 @@ let bubblingBeakers = [];
     });
 
     // Dynamic feedback text
-    if(bubblingBeakers.length > 0) {
-        fbAcid.textContent = `تمت إضافة حمض HCl. النتيجة: انطلاق فقاعات غاز $CO_2$ في المادة ${bubblingBeakers.join(' و ')} فقط.`;
+    if(bubblingBeakers.length &gt; 0) {
+        fbAcid.textContent = `تمت إضافة حمض HCl. النتيجة: انطلاق فقاعات غاز $CO_2$ في المادة ${bubblingBeakers.join(&#39; و &#39;)} فقط.`;
     } else {
         fbAcid.textContent = `تمت إضافة حمض HCl. النتيجة: لم يلاحظ انطلاق أي غاز.`;
     }
     
-    fbAcid.className = "mt-4 text-center text-sm font-bold text-sky-800 min-h-[40px] fade-in";
+    fbAcid.className = &quot;mt-4 text-center text-sm font-bold text-sky-800 min-h-[40px] fade-in&quot;;
     if(window.MathJax) MathJax.typesetPromise([fbAcid]);
 });
 
@@ -388,43 +389,44 @@ var promiseforaninput = stack_js.request_access_to_input("ans1", true);
 promiseforaninput.then((id) => {
 let stackInput = document.getElementById(id);
 
-document.getElementById('btn-check').addEventListener('click', function() {
+document.getElementById(&#39;btn-check&#39;).addEventListener(&#39;click&#39;, function() {
     const vals = {
-        a: document.getElementById('dropdown-a').getAttribute('data-value'),
-        b: document.getElementById('dropdown-b').getAttribute('data-value'),
-        c: document.getElementById('dropdown-c').getAttribute('data-value'),
-        d: document.getElementById('dropdown-d').getAttribute('data-value')
+        a: document.getElementById(&#39;dropdown-a&#39;).getAttribute(&#39;data-value&#39;),
+        b: document.getElementById(&#39;dropdown-b&#39;).getAttribute(&#39;data-value&#39;),
+        c: document.getElementById(&#39;dropdown-c&#39;).getAttribute(&#39;data-value&#39;),
+        d: document.getElementById(&#39;dropdown-d&#39;).getAttribute(&#39;data-value&#39;)
     };
     
-    const msg = document.getElementById('result-msg');
+    const msg = document.getElementById(&#39;result-msg&#39;);
 
     if(!vals.a || !vals.b || !vals.c || !vals.d) {
-        msg.textContent = "⚠️ يرجى اختيار جميع المواد قبل التحقق.";
-        msg.className = "text-orange-600 font-bold mt-4 fade-in text-center";
+        msg.textContent = &quot;⚠️ يرجى اختيار جميع المواد قبل التحقق.&quot;;
+        msg.className = &quot;text-orange-600 font-bold mt-4 fade-in text-center&quot;;
         return;
     }
 
-    // Verify against Maxima's injected correct answers
-    if(vals.a === correctAnswers[0] && vals.b === correctAnswers[1] && vals.c === correctAnswers[2] && vals.d === correctAnswers[3]) {
-        msg.textContent = "✅ إجابات صحيحة! تم إرسال الإجابة للمنصة.";
-        msg.className = "text-emerald-600 font-bold mt-4 fade-in text-center text-lg";
+    // Verify against Maxima&#39;s injected correct answers
+    if(vals.a === correctAnswers[0] &amp;&amp; vals.b === correctAnswers[1] &amp;&amp; vals.c === correctAnswers[2] &amp;&amp; vals.d === correctAnswers[3]) {
+        msg.textContent = &quot;✅ إجابات صحيحة! تم إرسال الإجابة للمنصة.&quot;;
+        msg.className = &quot;text-emerald-600 font-bold mt-4 fade-in text-center text-lg&quot;;
     } else {
         // Generic dynamic error message
-        msg.textContent = "❌ هناك خطأ في التحليل. راجع ألوان الكاشف (الأحمر للحمض، الأصفر للقاعدة القوية، الأزرق للقاعدة الضعيفة) ولاحظ أي مادة أطلقت الغاز.";
-        msg.className = "text-rose-600 font-bold mt-4 fade-in text-center text-lg";
+        msg.textContent = &quot;❌ هناك خطأ في التحليل. راجع ألوان الكاشف (الأحمر للحمض، الأصفر للقاعدة القوية، الأزرق للقاعدة الضعيفة) ولاحظ أي مادة أطلقت الغاز.&quot;;
+        msg.className = &quot;text-rose-600 font-bold mt-4 fade-in text-center text-lg&quot;;
     }
 
     // Format safely for Maxima: Re-escape backslashes before sending
     function escapeForMaxima(str) {
-        return str.replace(/\\/g, '\\\\');
+        return str.replace(/\\/g, &#39;\\\\&#39;);
     }
     
-    let maximaList = `["${escapeForMaxima(vals.a)}", "${escapeForMaxima(vals.b)}", "${escapeForMaxima(vals.c)}", "${escapeForMaxima(vals.d)}"]`;
+    let maximaList = `[&quot;${escapeForMaxima(vals.a)}&quot;, &quot;${escapeForMaxima(vals.b)}&quot;, &quot;${escapeForMaxima(vals.c)}&quot;, &quot;${escapeForMaxima(vals.d)}&quot;]`;
     stackInput.value = maximaList;
-    stackInput.dispatchEvent(new Event('change'));
+    stackInput.dispatchEvent(new Event(&#39;change&#39;));
 });
 
 
 });
-[[/script]]
+</script>
+
 [[/iframe]]
