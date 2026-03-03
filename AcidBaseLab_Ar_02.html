@@ -1,3 +1,4 @@
+s1
 [[iframe width="100%" height="950px" scrolling="true"]]
 
 <!-- INJECT MAXIMA VARIABLES HERE INSIDE THE IFRAME -->
@@ -5,7 +6,7 @@
 <div id="stack-react" style="display:none;">{#react#}</div>
 <div id="stack-correct" style="display:none;">{#correct_ans#}</div>
 
-<!-- CSS Styling (Fixed to standard HTML tags) -->
+<!-- CSS Styling -->
 
 <style>
 @import url('https://www.google.com/search?q=https://fonts.googleapis.com/css2%3Ffamily%3DTajawal:wght%40400%3B500%3B700%3B800%26display%3Dswap');
@@ -34,11 +35,11 @@ animation: rise 2s infinite ease-in;
 .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 </style>
 
-<!-- External Libraries (Fixed to standard HTML tags) -->
+<!-- External Libraries (Fixed Corrupted URLs) -->
 
 <script src="https://www.google.com/search?q=https://cdn.tailwindcss.com"></script>
 
-<!-- MathJax Configuration (Fixed to standard HTML tags) -->
+<!-- MathJax Configuration -->
 
 <script>
 window.MathJax = {
@@ -69,146 +70,143 @@ processHtmlClass: 'tex2jax_process'
 <h1 class="text-2xl font-bold text-center text-indigo-700 mb-6">مختبر الكيمياء التفاعلي: تشخيص المواد حسب التقرير</h1>
 
 <!-- Instructions (Now Dynamic) -->
-
 <div class="bg-white p-4 rounded-lg shadow mb-6 border-r-4 border-indigo-500">
-<p class="mb-2 font-medium">بناءً على التفاعلات في طاولة المختبر أدناه، قم بتحديد المواد A, B, C, D من بين الخيارات التالية:</p>
-<p id="dynamic-materials-list" class="text-lg font-bold text-indigo-800 mb-2" dir="ltr" style="text-align: right;">
-<!-- Will be populated from Maxima -->
-</p>
+    <p class="mb-2 font-medium">بناءً على التفاعلات في طاولة المختبر أدناه، قم بتحديد المواد A, B, C, D من بين الخيارات التالية:</p>
+    <p id="dynamic-materials-list" class="text-lg font-bold text-indigo-800 mb-2" dir="ltr" style="text-align: right;">
+        <!-- Will be populated from Maxima -->
+    </p>
 </div>
 
 <!-- Interactive Lab Section: Split into Two Experiments -->
-
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
 
-<!-- ================= EXPERIMENT 1: RED CABBAGE ================= -->
-<div class="bg-white p-6 rounded-lg shadow border-t-4 border-purple-400 flex flex-col">
-    <h2 class="text-lg font-semibold mb-4 text-purple-800 text-center">تجربة 1: كاشف عصير الملفوف الأحمر</h2>
-    
-    <!-- pH Scale Guide -->
-    <div class="mb-8 w-full">
-        <h3 class="font-bold text-gray-600 mb-2 text-center text-xs">ألوان الملفوف الأحمر (مقياس الـ pH)</h3>
-        <div class="flex h-6 w-full rounded overflow-hidden shadow-inner" dir="ltr">
-            <div class="flex-1 bg-red-600" title="حمضي قوي (1-2)"></div>
-            <div class="flex-1 bg-pink-500" title="حمضي ضعيف (3-4)"></div>
-            <div class="flex-1 bg-purple-600" title="متعادل (7)"></div>
-            <div class="flex-1 bg-blue-500" title="قاعدي ضعيف (8-9)"></div>
-            <div class="flex-1 bg-green-500" title="قاعدي (10-12)"></div>
-            <div class="flex-1 bg-yellow-400" title="قاعدي قوي (13-14)"></div>
+    <!-- ================= EXPERIMENT 1: RED CABBAGE ================= -->
+    <div class="bg-white p-6 rounded-lg shadow border-t-4 border-purple-400 flex flex-col">
+        <h2 class="text-lg font-semibold mb-4 text-purple-800 text-center">تجربة 1: كاشف عصير الملفوف الأحمر</h2>
+        
+        <!-- pH Scale Guide -->
+        <div class="mb-8 w-full">
+            <h3 class="font-bold text-gray-600 mb-2 text-center text-xs">ألوان الملفوف الأحمر (مقياس الـ pH)</h3>
+            <div class="flex h-6 w-full rounded overflow-hidden shadow-inner" dir="ltr">
+                <div class="flex-1 bg-red-600" title="حمضي قوي (1-2)"></div>
+                <div class="flex-1 bg-pink-500" title="حمضي ضعيف (3-4)"></div>
+                <div class="flex-1 bg-purple-600" title="متعادل (7)"></div>
+                <div class="flex-1 bg-blue-500" title="قاعدي ضعيف (8-9)"></div>
+                <div class="flex-1 bg-green-500" title="قاعدي (10-12)"></div>
+                <div class="flex-1 bg-yellow-400" title="قاعدي قوي (13-14)"></div>
+            </div>
+            <div class="flex justify-between mt-1 text-[10px] text-gray-500 font-bold px-1" dir="ltr">
+                <span>1 (Acidic)</span>
+                <span>7 (Neutral)</span>
+                <span>14 (Basic)</span>
+            </div>
         </div>
-        <div class="flex justify-between mt-1 text-[10px] text-gray-500 font-bold px-1" dir="ltr">
-            <span>1 (Acidic)</span>
-            <span>7 (Neutral)</span>
-            <span>14 (Basic)</span>
+
+        <!-- 4 Beakers for Indicator -->
+        <div class="flex justify-center gap-4 sm:gap-8 items-end h-32 mb-6 border-b-4 border-slate-300 pb-2">
+            <div class="flex flex-col items-center">
+                <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
+                    <div id="liquid-a-ind" class="absolute bottom-0 w-full h-16 bg-slate-200/50 transition-colors duration-1000"></div>
+                </div>
+                <span class="mt-2 font-bold text-slate-700 text-sm">المادة A</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
+                    <div id="liquid-b-ind" class="absolute bottom-0 w-full h-16 bg-slate-200/50 transition-colors duration-1000"></div>
+                </div>
+                <span class="mt-2 font-bold text-slate-700 text-sm">المادة B</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
+                    <div id="liquid-c-ind" class="absolute bottom-0 w-full h-16 bg-slate-200/50 transition-colors duration-1000"></div>
+                </div>
+                <span class="mt-2 font-bold text-slate-700 text-sm">المادة C</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
+                    <div id="liquid-d-ind" class="absolute bottom-0 w-full h-16 bg-slate-200/50 transition-colors duration-1000"></div>
+                </div>
+                <span class="mt-2 font-bold text-slate-700 text-sm">المادة D</span>
+            </div>
         </div>
+
+        <div class="flex justify-center mt-auto">
+            <button id="btn-indicator" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-xl shadow-md transition-transform transform hover:scale-105">
+                إضافة عصير الملفوف
+            </button>
+        </div>
+        <p id="fb-ind" class="mt-4 text-center text-sm font-medium text-purple-800 min-h-[40px]"></p>
     </div>
 
-    <!-- 4 Beakers for Indicator -->
-    <div class="flex justify-center gap-4 sm:gap-8 items-end h-32 mb-6 border-b-4 border-slate-300 pb-2">
-        <div class="flex flex-col items-center">
-            <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
-                <div id="liquid-a-ind" class="absolute bottom-0 w-full h-16 bg-slate-200/50 transition-colors duration-1000"></div>
+    <!-- ================= EXPERIMENT 2: HCl ACID ================= -->
+    <div class="bg-white p-6 rounded-lg shadow border-t-4 border-sky-400 flex flex-col">
+        <h2 class="text-lg font-semibold mb-4 text-sky-800 text-center">تجربة 2: إضافة الحمض (HCl)</h2>
+        <p class="text-center text-xs text-gray-500 mb-8">استخدام عينات جديدة من المحاليل بدون كاشف لاختبار تصاعد الغاز</p>
+        
+        <!-- 4 Beakers for Acid -->
+        <div class="flex justify-center gap-4 sm:gap-8 items-end h-32 mb-6 border-b-4 border-slate-300 pb-2">
+            <div class="flex flex-col items-center">
+                <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
+                    <div class="absolute bottom-0 w-full h-16 bg-slate-200/50"></div>
+                    <div id="bubbles-a-acid" class="absolute bottom-0 w-full h-full pointer-events-none"></div>
+                </div>
+                <span class="mt-2 font-bold text-slate-700 text-sm">المادة A</span>
             </div>
-            <span class="mt-2 font-bold text-slate-700 text-sm">المادة A</span>
-        </div>
-        <div class="flex flex-col items-center">
-            <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
-                <div id="liquid-b-ind" class="absolute bottom-0 w-full h-16 bg-slate-200/50 transition-colors duration-1000"></div>
+            <div class="flex flex-col items-center">
+                <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
+                    <div class="absolute bottom-0 w-full h-16 bg-slate-200/50"></div>
+                    <div id="bubbles-b-acid" class="absolute bottom-0 w-full h-full pointer-events-none"></div>
+                </div>
+                <span class="mt-2 font-bold text-slate-700 text-sm">المادة B</span>
             </div>
-            <span class="mt-2 font-bold text-slate-700 text-sm">المادة B</span>
-        </div>
-        <div class="flex flex-col items-center">
-            <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
-                <div id="liquid-c-ind" class="absolute bottom-0 w-full h-16 bg-slate-200/50 transition-colors duration-1000"></div>
+            <div class="flex flex-col items-center">
+                <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
+                    <div class="absolute bottom-0 w-full h-16 bg-slate-200/50"></div>
+                    <div id="bubbles-c-acid" class="absolute bottom-0 w-full h-full pointer-events-none"></div>
+                </div>
+                <span class="mt-2 font-bold text-slate-700 text-sm">المادة C</span>
             </div>
-            <span class="mt-2 font-bold text-slate-700 text-sm">المادة C</span>
-        </div>
-        <div class="flex flex-col items-center">
-            <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
-                <div id="liquid-d-ind" class="absolute bottom-0 w-full h-16 bg-slate-200/50 transition-colors duration-1000"></div>
+            <div class="flex flex-col items-center">
+                <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
+                    <div class="absolute bottom-0 w-full h-16 bg-slate-200/50"></div>
+                    <div id="bubbles-d-acid" class="absolute bottom-0 w-full h-full pointer-events-none"></div>
+                </div>
+                <span class="mt-2 font-bold text-slate-700 text-sm">المادة D</span>
             </div>
-            <span class="mt-2 font-bold text-slate-700 text-sm">المادة D</span>
         </div>
+
+        <div class="flex justify-center mt-auto">
+            <button id="btn-acid" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-6 rounded-xl shadow-md transition-transform transform hover:scale-105">
+                إضافة الحمض (HCl)
+            </button>
+        </div>
+        <p id="fb-acid" class="mt-4 text-center text-sm font-medium text-sky-800 min-h-[40px]"></p>
     </div>
 
-    <div class="flex justify-center mt-auto">
-        <button id="btn-indicator" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-xl shadow-md transition-transform transform hover:scale-105">
-            إضافة عصير الملفوف
-        </button>
-    </div>
-    <p id="fb-ind" class="mt-4 text-center text-sm font-medium text-purple-800 min-h-[40px]"></p>
 </div>
 
-<!-- ================= EXPERIMENT 2: HCl ACID ================= -->
-<div class="bg-white p-6 rounded-lg shadow border-t-4 border-sky-400 flex flex-col">
-    <h2 class="text-lg font-semibold mb-4 text-sky-800 text-center">تجربة 2: إضافة الحمض (HCl)</h2>
-    <p class="text-center text-xs text-gray-500 mb-8">استخدام عينات جديدة من المحاليل بدون كاشف لاختبار تصاعد الغاز</p>
-    
-    <!-- 4 Beakers for Acid -->
-    <div class="flex justify-center gap-4 sm:gap-8 items-end h-32 mb-6 border-b-4 border-slate-300 pb-2">
-        <div class="flex flex-col items-center">
-            <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
-                <div class="absolute bottom-0 w-full h-16 bg-slate-200/50"></div>
-                <div id="bubbles-a-acid" class="absolute bottom-0 w-full h-full pointer-events-none"></div>
-            </div>
-            <span class="mt-2 font-bold text-slate-700 text-sm">المادة A</span>
-        </div>
-        <div class="flex flex-col items-center">
-            <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
-                <div class="absolute bottom-0 w-full h-16 bg-slate-200/50"></div>
-                <div id="bubbles-b-acid" class="absolute bottom-0 w-full h-full pointer-events-none"></div>
-            </div>
-            <span class="mt-2 font-bold text-slate-700 text-sm">المادة B</span>
-        </div>
-        <div class="flex flex-col items-center">
-            <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
-                <div class="absolute bottom-0 w-full h-16 bg-slate-200/50"></div>
-                <div id="bubbles-c-acid" class="absolute bottom-0 w-full h-full pointer-events-none"></div>
-            </div>
-            <span class="mt-2 font-bold text-slate-700 text-sm">المادة C</span>
-        </div>
-        <div class="flex flex-col items-center">
-            <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
-                <div class="absolute bottom-0 w-full h-16 bg-slate-200/50"></div>
-                <div id="bubbles-d-acid" class="absolute bottom-0 w-full h-full pointer-events-none"></div>
-            </div>
-            <span class="mt-2 font-bold text-slate-700 text-sm">المادة D</span>
-        </div>
-    </div>
-
-    <div class="flex justify-center mt-auto">
-        <button id="btn-acid" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-6 rounded-xl shadow-md transition-transform transform hover:scale-105">
-            إضافة الحمض (HCl)
-        </button>
-    </div>
-    <p id="fb-acid" class="mt-4 text-center text-sm font-medium text-sky-800 min-h-[40px]"></p>
-</div>
-
-
-</div>
-
-<!-- Student Answer Selection UI (Custom LaTeX-Friendly Dropdowns) -->
-
+<!-- Student Answer Selection UI -->
 <div class="bg-white p-6 rounded-lg shadow mb-6 border-t-4 border-indigo-500">
-<h2 class="text-xl font-semibold mb-6">حدد المواد المتطابقة مع النتائج:</h2>
-<div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="dropdown-containers">
-<!-- Dynamic Custom Dropdowns will be generated here by JS -->
+    <h2 class="text-xl font-semibold mb-6">حدد المواد المتطابقة مع النتائج:</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="dropdown-containers">
+        <!-- Dynamic Custom Dropdowns will be generated here by JS -->
+    </div>
+
+    <div class="mt-8 flex justify-center">
+        <button id="btn-check" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-10 rounded-xl shadow-lg transition-all transform hover:scale-105">
+            التحقق من الإجابات وتسليمها
+        </button>
+    </div>
+    <div id="result-msg" class="mt-4 text-center min-h-[24px]"></div>
 </div>
 
-<div class="mt-8 flex justify-center">
-    <button id="btn-check" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-10 rounded-xl shadow-lg transition-all transform hover:scale-105">
-        التحقق من الإجابات وتسليمها
-    </button>
-</div>
-<div id="result-msg" class="mt-4 text-center min-h-[24px]"></div>
-
 
 </div>
 
-<!-- Interactive JS & STACK Integration (Fixed to standard HTML tag) -->
+<!-- Interactive JS & STACK Integration -->
 
 <script type="module">
-// 1. Import STACK-JS securely (cors tag is native STACK so it stays as [[cors...]])
+// 1. Import STACK-JS securely
 import {stack_js} from '[[cors src="stackjsiframe.js"/]]';
 stack_js.resize_containing_frame({#width#}, {#height#});
 
@@ -239,7 +237,7 @@ const materials = parseStackList(rawReact);
 const correctAnswers = parseStackList(rawCorrect);
 
 // 3. Initialize Dynamic UI Elements
-document.getElementById('dynamic-materials-list').innerHTML = ( ${materials.join(&#39; ,  &#39;)} );
+document.getElementById('dynamic-materials-list').innerHTML = ( ${materials.join(&#39; , &#39;)} );
 
 // Build Custom Dropdowns (to support MathJax inside options)
 const dropdownContainers = document.getElementById('dropdown-containers');
