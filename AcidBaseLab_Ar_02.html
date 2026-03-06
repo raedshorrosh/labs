@@ -1,4 +1,4 @@
-V03
+V05
 [[iframe width="100%" height="950px" scrolling="true"]]
 
 [[style]]
@@ -290,6 +290,22 @@ var promiseforaninput = stack_js.request_access_to_input("ans1", true);
 promiseforaninput.then((id) => {
     let stackInput = document.getElementById(id);
 
+    // --- Load previous answer if it exists ---
+    if (stackInput.value && stackInput.value.trim() !== "") {
+        try {
+            let prev = JSON.parse(stackInput.value); 
+            if (Array.isArray(prev) && prev.length === 4) {
+                document.getElementById('sel-a').value = prev[0];
+                document.getElementById('sel-b').value = prev[1];
+                document.getElementById('sel-c').value = prev[2];
+                document.getElementById('sel-d').value = prev[3];
+            }
+        } catch (e) {
+            console.warn("Could not parse previous answer from STACK.", e);
+        }
+    }
+
+    // Handle the Check button click
     document.getElementById('btn-check').addEventListener('click', function() {
         const vals = [
             document.getElementById('sel-a').value,
@@ -316,7 +332,7 @@ promiseforaninput.then((id) => {
             }
         }
 
-        // Visual feedback (Generic logic suitable for random variables)
+        // Visual feedback
         if(isCorrect) {
             msg.textContent = "✅ إجابات صحيحة! لقد قمت بتحليل نتائج التقرير بدقة. تم إرسال الإجابة للمنصة.";
             msg.className = "text-emerald-600 font-bold mt-4 fade-in text-center text-lg";
@@ -333,6 +349,5 @@ promiseforaninput.then((id) => {
         stackInput.dispatchEvent(new Event('change'));
     });
 });
-
 [[/script]]
 [[/iframe]]
