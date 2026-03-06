@@ -24,20 +24,6 @@ body { font-family: 'Tajawal', sans-serif; background-color: #fcfdfd; color: #1e
 
 [[script src="https://cdn.tailwindcss.com"]][[/script]]
 
-[[script]]
-window.MathJax = {
-tex: {
-inlineMath: [['$', '$'], ['\\(', '\\)']],
-displayMath: [['$$', '$$'], ['\\[', '\\]']],
-processEscapes: true
-},
-options: {
-processHtmlClass: 'tex2jax_process'
-}
-};
-[[/script]]
-[[script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"]][[/script]]
-
 <div class="p-6 max-w-7xl mx-auto tex2jax_process" dir="rtl">
 <h1 class="text-2xl font-bold text-center text-indigo-700 mb-6">مختبر الكيمياء التفاعلي: تشخيص المواد حسب التقرير</h1>
 
@@ -45,14 +31,19 @@ processHtmlClass: 'tex2jax_process'
     <p class="mb-2 font-medium">بناءً على التفاعلات في طاولة المختبر أدناه، قم بتحديد المواد A, B, C, D من بين الخيارات التالية:</p>
     <p id="chem-list" class="text-sm text-gray-800 mb-2 font-bold tracking-widest" dir="ltr" style="text-align: right;"> </p>
 </div>
-
+    
+<div class="bg-blue-50 border-r-4 border-blue-600 p-4 mb-6 rounded-l-lg shadow-sm">
+    <p class="text-blue-900 font-bold text-lg text-right">
+        🧪 ملاحظة هامة: تحتوي الأوعية (A, B, C, D) على محاليل مائية مجهولة التركيز للمواد المذكورة أعلاه.
+    </p>
+</div>
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
     
     <div class="bg-white p-6 rounded-lg shadow border-t-4 border-purple-400 flex flex-col">
         <h2 class="text-lg font-semibold mb-4 text-purple-800 text-center">تجربة 1: كاشف عصير الملفوف الأحمر</h2>
         
         <div class="mb-8 w-full">
-            <h3 class="font-bold text-gray-600 mb-2 text-center text-xs">ألوان الملفوف الأحمر (مقياس الـ pH)</h3>
+            <h3 class="text-xl text-purple-800 font-extrabold mb-4 mt-2 text-center">🌈 ألوان الملفوف الأحمر (مقياس الـ pH)</h3>
             <div class="flex h-6 w-full rounded overflow-hidden shadow-inner" dir="ltr">
                 <div class="flex-1 bg-red-600" title="حمضي قوي (1-2)"></div>
                 <div class="flex-1 bg-pink-500" title="حمضي ضعيف (3-4)"></div>
@@ -105,8 +96,7 @@ processHtmlClass: 'tex2jax_process'
 
     <div class="bg-white p-6 rounded-lg shadow border-t-4 border-sky-400 flex flex-col">
         <h2 class="text-lg font-semibold mb-4 text-sky-800 text-center">تجربة 2: إضافة الحمض (HCl)</h2>
-        <p class="text-center text-xs text-gray-500 mb-8">استخدام عينات جديدة من المحاليل بدون كاشف لاختبار تصاعد الغاز</p>
-        
+        <p class="text-lg text-teal-800 font-bold mt-2 mb-6 text-center bg-teal-50 py-2 rounded-lg border border-teal-200 shadow-sm">💡 ملاحظة: تم استخدام عينات جديدة من المحاليل (بدون كاشف) لاختبار تصاعد الغاز.</p>        
         <div class="flex justify-center gap-4 sm:gap-8 items-end h-32 mb-6 border-b-4 border-slate-300 pb-2">
             <div class="flex flex-col items-center">
                 <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
@@ -270,12 +260,10 @@ if(btnAcid) {
             }
         });
 
-        fbAcid.textContent = "تمت إضافة حمض HCl. النتيجة: انطلاق فقاعات غاز $CO_2$ في المادة التي تحتوي على الكربونات.";
+        fbAcid.textContent = "تمت إضافة حمض HCl. النتيجة: انطلاق فقاعات غاز CO₂ في المادة التي تحتوي على الكربونات.";
         fbAcid.className = "mt-4 text-center text-sm font-bold text-sky-800 min-h-[40px] fade-in";
         
-        if(window.MathJax) {
-            MathJax.typesetPromise([fbAcid]);
-        }
+       
     });
 }
 
