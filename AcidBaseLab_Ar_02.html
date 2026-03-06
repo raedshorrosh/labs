@@ -1,3 +1,4 @@
+V02
 [[iframe width="100%" height="950px" scrolling="true"]]
 
 [[style]]
@@ -42,7 +43,7 @@ processHtmlClass: 'tex2jax_process'
 
 <div class="bg-white p-4 rounded-lg shadow mb-6 border-r-4 border-indigo-500">
     <p class="mb-2 font-medium">بناءً على التفاعلات في طاولة المختبر أدناه، قم بتحديد المواد A, B, C, D من بين الخيارات التالية:</p>
-    <p class="text-sm text-gray-600 mb-2 font-bold" dir="ltr" style="text-align: right;">( {#react[1]#}, {#react[2]#}, {#react[3]#}, {#react[4]#} )</p>
+    <p class="text-sm text-gray-800 mb-2 font-bold tracking-widest" dir="ltr" style="text-align: right;">( {#react[1]#} , {#react[2]#} , {#react[3]#} , {#react[4]#} )</p>
 </div>
 
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
@@ -195,34 +196,26 @@ stack_js.resize_containing_frame({#width#}, {#height#});
 const correctAns = {#correct_ans#}; 
 const reactOptions = {#react#}; 
 
-// Helper Function: Classify the chemical to decide its visual behavior
+// Helper Function: Classify the chemical (Updated for Unicode strings)
 function getChemProperty(chem) {
-    if(chem.includes("NaHSO_4") || chem.includes("HCl") || chem.includes("HNO_3")) return "acid";
+    if(chem.includes("NaHSO₄") || chem.includes("HCl") || chem.includes("HNO₃")) return "acid";
     if(chem.includes("NaOH") || chem.includes("KOH") || chem.includes("LiOH")) return "sbase";
-    if(chem.includes("NaHCO_3") || chem.includes("Na_2CO_3")) return "carb"; // weak base
+    if(chem.includes("NaHCO₃") || chem.includes("Na₂CO₃")) return "carb"; 
     if(chem.includes("NaCl") || chem.includes("KCl")) return "neutral";
     return "unknown";
 }
 
-// Map the random chemicals in Beakers A, B, C, D to their properties
 const beakerProps = correctAns.map(getChemProperty);
 const beakerIds = ['a', 'b', 'c', 'd'];
 
-// Helper Function: Strip MathJax tags and convert numbers to subscripts for dropdowns
-function cleanForDropdown(str) {
-    let s = str.replace(/\\/g, '').replace(/\(/g, '').replace(/\)/g, '').replace(/small /g, '');
-    const subs = {'0':'₀', '1':'₁', '2':'₂', '3':'₃', '4':'₄', '5':'₅', '6':'₆', '7':'▷', '8':'₈', '9':'₉'};
-    return s.replace(/_([0-9])/g, (match, num) => subs[num]);
-}
-
-// Dynamically populate the select menus
+// Dynamically populate the select menus (Simplified!)
 const selectElements = ['sel-a', 'sel-b', 'sel-c', 'sel-d'];
 selectElements.forEach(selId => {
     const sel = document.getElementById(selId);
     reactOptions.forEach(opt => {
         let optionEl = document.createElement('option');
-        optionEl.value = opt; // Keep exact Maxima string for STACK grading
-        optionEl.textContent = cleanForDropdown(opt); // Clean view for the user
+        optionEl.value = opt; // القيمة التي سترسل لـ STACK
+        optionEl.textContent = opt; // النص النظيف الذي سيراه الطالب
         sel.appendChild(optionEl);
     });
 });
