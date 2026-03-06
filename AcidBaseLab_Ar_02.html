@@ -1,4 +1,4 @@
-V05
+V06
 [[iframe width="100%" height="950px" scrolling="true"]]
 
 [[style]]
@@ -290,15 +290,24 @@ var promiseforaninput = stack_js.request_access_to_input("ans1", true);
 promiseforaninput.then((id) => {
     let stackInput = document.getElementById(id);
 
-    // --- Load previous answer if it exists ---
+    // --- Load previous answer and visually update lab ---
     if (stackInput.value && stackInput.value.trim() !== "") {
         try {
             let prev = JSON.parse(stackInput.value); 
+            
+            // If it's a valid array with 4 items, pre-fill the dropdowns
             if (Array.isArray(prev) && prev.length === 4) {
+                // 1. Restore the dropdown selections
                 document.getElementById('sel-a').value = prev[0];
                 document.getElementById('sel-b').value = prev[1];
                 document.getElementById('sel-c').value = prev[2];
                 document.getElementById('sel-d').value = prev[3];
+
+                // 2. Auto-run the experiments to show the saved visual state
+                const btnInd = document.getElementById('btn-indicator');
+                const btnAcid = document.getElementById('btn-acid');
+                if (btnInd) btnInd.click();
+                if (btnAcid) btnAcid.click();
             }
         } catch (e) {
             console.warn("Could not parse previous answer from STACK.", e);
