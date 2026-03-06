@@ -177,12 +177,7 @@ processHtmlClass: 'tex2jax_process'
         </div>
     </div>
     
-    <div class="mt-8 flex justify-center">
-        <button id="btn-check" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-10 rounded-xl shadow-lg transition-all transform hover:scale-105">
-            التحقق من الإجابات وتسليمها
-        </button>
-    </div>
-    <div id="result-msg" class="mt-4 text-center min-h-[24px]"></div>
+    
 </div>
 
 </div>
@@ -284,7 +279,7 @@ if(btnAcid) {
     });
 }
 
-// 4. Connect to STACK and handle the Check button
+// 4. Connect to STACK and handle automatic updates
 var promiseforaninput = stack_js.request_access_to_input("ans1", true);
 
 promiseforaninput.then((id) => {
@@ -297,13 +292,12 @@ promiseforaninput.then((id) => {
             
             // If it's a valid array with 4 items, pre-fill the dropdowns
             if (Array.isArray(prev) && prev.length === 4) {
-                // 1. Restore the dropdown selections
                 document.getElementById('sel-a').value = prev[0];
                 document.getElementById('sel-b').value = prev[1];
                 document.getElementById('sel-c').value = prev[2];
                 document.getElementById('sel-d').value = prev[3];
 
-                // 2. Auto-run the experiments to show the saved visual state
+                // Auto-run the experiments to show the saved visual state
                 const btnInd = document.getElementById('btn-indicator');
                 const btnAcid = document.getElementById('btn-acid');
                 if (btnInd) btnInd.click();
@@ -314,8 +308,8 @@ promiseforaninput.then((id) => {
         }
     }
 
-    // Handle the Check button click
-    document.getElementById('btn-check').addEventListener('click', function() {
+    // --- NEW: Function to automatically update STACK input ---
+    function updateStackInput() {
         const vals = [
             document.getElementById('sel-a').value,
             document.getElementById('sel-b').value,
@@ -323,39 +317,18 @@ promiseforaninput.then((id) => {
             document.getElementById('sel-d').value
         ];
         
-        const msg = document.getElementById('result-msg');
-
-        // Guard against empty answers
-        if(vals.includes("")) {
-            msg.textContent = "⚠️ يرجى اختيار جميع المواد قبل التحقق.";
-            msg.className = "text-orange-600 font-bold mt-4 fade-in text-center";
-            return;
-        }
-
-        // Check against correct array
-        let isCorrect = true;
-        for(let i = 0; i < 4; i++) {
-            if(vals[i] !== correctAns[i]) {
-                isCorrect = false;
-                break;
-            }
-        }
-
-        // Visual feedback
-        if(isCorrect) {
-            msg.textContent = "✅ إجابات صحيحة! لقد قمت بتحليل نتائج التقرير بدقة. تم إرسال الإجابة للمنصة.";
-            msg.className = "text-emerald-600 font-bold mt-4 fade-in text-center text-lg";
-        } else {
-            msg.textContent = "❌ هناك خطأ في تحديد بعض المواد. تذكر: الكربونات هي الوحيدة التي تطلق غازاً مع الحمض، وتأكد من مطابقة ألوان الكاشف.";
-            msg.className = "text-rose-600 font-bold mt-4 fade-in text-center text-lg";
-        }
-
         // Send data to STACK Maxima backend
         let maximaList = JSON.stringify(vals);
         stackInput.value = maximaList;
         
         // Force Moodle to recognise the input change
         stackInput.dispatchEvent(new Event('change'));
+    }
+
+    // Attach event listeners to all dropdowns to trigger the update on any change
+    const selectIds = ['sel-a', 'sel-b', 'sel-c', 'sel-d'];
+    selectIds.forEach(selectId => {
+        document.getElementById(selectId).addEventListener('change', updateStackInput);
     });
 });
 [[/script]]
