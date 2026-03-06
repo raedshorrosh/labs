@@ -1,4 +1,4 @@
-V02
+V03
 [[iframe width="100%" height="950px" scrolling="true"]]
 
 [[style]]
@@ -43,7 +43,7 @@ processHtmlClass: 'tex2jax_process'
 
 <div class="bg-white p-4 rounded-lg shadow mb-6 border-r-4 border-indigo-500">
     <p class="mb-2 font-medium">بناءً على التفاعلات في طاولة المختبر أدناه، قم بتحديد المواد A, B, C, D من بين الخيارات التالية:</p>
-    <p class="text-sm text-gray-800 mb-2 font-bold tracking-widest" dir="ltr" style="text-align: right;">( {#react[1]#} , {#react[2]#} , {#react[3]#} , {#react[4]#} )</p>
+    <p id="chem-list" class="text-sm text-gray-800 mb-2 font-bold tracking-widest" dir="ltr" style="text-align: right;"> </p>
 </div>
 
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
@@ -195,6 +195,8 @@ stack_js.resize_containing_frame({#width#}, {#height#});
 // 2. Fetch Randomized Variables from Maxima
 const correctAns = {#correct_ans#}; 
 const reactOptions = {#react#}; 
+// الكود الجديد: طباعة المواد بدون علامات تنصيص
+document.getElementById('chem-list').textContent = '( ' + reactOptions.join(' , ') + ' )';
 
 // Helper Function: Classify the chemical (Updated for Unicode strings)
 function getChemProperty(chem) {
