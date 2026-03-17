@@ -295,7 +295,7 @@ promiseforaninput.then((id) => {
         }
     }
 
-    // --- NEW: Visual Grading if Input is Inactive (Submitted) ---
+// --- NEW: Visual Grading if Input is Inactive (Submitted) ---
     // Moodle/STACK sets the input to readonly/disabled when the question is graded
     if (stackInput.readOnly || stackInput.disabled) {
         const selectIds = ['sel-a', 'sel-b', 'sel-c', 'sel-d'];
@@ -303,16 +303,19 @@ promiseforaninput.then((id) => {
         selectIds.forEach((selectId, index) => {
             let sel = document.getElementById(selectId);
             sel.disabled = true; // Lock the dropdown so student can't change it
+            
+            // Grab the label element that sits right above the select menu
+            let label = sel.previousElementSibling;
 
-            // Compare student's selection to the Maxima correct_ans array
+            // Compare student's selection to the Maxima correctAns array
             if (sel.value === correctAns[index]) {
-                // Correct: Green border and background
-                sel.style.border = "3px solid #22c55e"; 
-                sel.style.backgroundColor = "#f0fdf4";
+                // Correct: Add a green checkmark next to the label
+                label.innerHTML += ' <span class="text-green-600 text-xl font-extrabold pr-2">✅</span>';
+                sel.style.borderColor = "#22c55e"; // Keep a subtle green border (optional)
             } else {
-                // Incorrect: Red border and background
-                sel.style.border = "3px solid #ef4444"; 
-                sel.style.backgroundColor = "#fef2f2";
+                // Incorrect: Add a red X next to the label
+                label.innerHTML += ' <span class="text-red-600 text-xl font-extrabold pr-2">❌</span>';
+                sel.style.borderColor = "#ef4444"; // Keep a subtle red border (optional)
             }
         });
     }
