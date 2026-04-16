@@ -1,0 +1,358 @@
+[[iframe width="100%" height="950px" scrolling="true"]]
+
+[[style]]
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;700;800&display=swap');
+body { font-family: 'Assistant', sans-serif; background-color: #fcfdfd; color: #1e293b; direction: rtl; }
+
+/* Animation classes */
+.fade-in { animation: fadeIn 0.5s ease-in; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.bubble { 
+    position: absolute; 
+    background: rgba(255, 255, 255, 0.8); 
+    border-radius: 50%; 
+    bottom: 0; 
+    animation: rise 2s infinite ease-in; 
+}
+@keyframes rise { 
+    0% { bottom: 0; transform: translateX(0); opacity: 1; } 
+    100% { bottom: 100%; transform: translateX(-15px); opacity: 0; } 
+}
+[[/style]]
+
+[[script src="https://cdn.tailwindcss.com"]][[/script]]
+
+<div class="p-6 max-w-7xl mx-auto tex2jax_process" dir="rtl">
+<h1 class="text-2xl font-bold text-center text-indigo-700 mb-6">مختبر الكيمياء التفاعلي: تحديد المواد</h1>
+
+<div class="bg-white p-4 rounded-lg shadow mb-6 border-r-4 border-indigo-500">
+    <p class="mb-2 font-medium">بناءً على التفاعلات في طاولة المختبر أدناه، حددوا المواد A، B، C، D من بين الخيارات التالية:</p>
+    <p id="chem-list" class="text-sm text-gray-800 mb-2 font-bold tracking-widest" dir="ltr" style="text-align: right;"> </p>
+</div>
+    
+<div class="bg-blue-50 border-r-4 border-blue-600 p-4 mb-6 rounded-l-lg shadow-sm">
+    <p class="text-blue-900 font-bold text-lg text-right">
+        🧪 ملاحظة هامة: تحتوي الأوعية على محاليل مائية للمواد المذكورة أعلاه.
+    </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+    
+    <div class="bg-white p-6 rounded-lg shadow border-t-4 border-purple-400 flex flex-col">
+        <h2 class="text-lg font-semibold mb-4 text-purple-800 text-center">التجربة 1: كاشف عصير الملفوف الأحمر</h2>
+        
+        <div class="mb-8 w-full">
+            <h3 class="text-xl text-purple-800 font-extrabold mb-4 mt-2 text-center">🌈 ألوان الملفوف الأحمر (مقياس pH)</h3>
+            <div class="flex h-6 w-full rounded overflow-hidden shadow-inner" dir="ltr">
+                <div class="flex-1 bg-red-600" title="حمضي قوي (1-2)"></div>
+                <div class="flex-1 bg-pink-500" title="حمضي ضعيف (3-4)"></div>
+                <div class="flex-1 bg-purple-600" title="متعادل (7)"></div>
+                <div class="flex-1 bg-blue-500" title="قاعدي ضعيف (8-9)"></div>
+                <div class="flex-1 bg-green-500" title="قاعدي (10-12)"></div>
+                <div class="flex-1 bg-yellow-400" title="قاعدي قوي (13-14)"></div>
+            </div>
+            <div class="flex justify-between mt-1 text-[10px] text-gray-500 font-bold px-1" dir="ltr">
+                <span>1 (حمضي)</span>
+                <span>7 (متعادل)</span>
+                <span>14 (قاعدي)</span>
+            </div>
+        </div>
+
+        <div class="flex justify-center gap-4 sm:gap-8 items-end h-32 mb-6 border-b-4 border-slate-300 pb-2">
+            <div class="flex flex-col items-center">
+                <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
+                    <div id="liquid-a-ind" class="absolute bottom-0 w-full h-16 bg-slate-200/50 transition-colors duration-1000"></div>
+                </div>
+                <span class="mt-2 font-bold text-slate-700 text-sm">المادة A</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
+                    <div id="liquid-b-ind" class="absolute bottom-0 w-full h-16 bg-slate-200/50 transition-colors duration-1000"></div>
+                </div>
+                <span class="mt-2 font-bold text-slate-700 text-sm">المادة B</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
+                    <div id="liquid-c-ind" class="absolute bottom-0 w-full h-16 bg-slate-200/50 transition-colors duration-1000"></div>
+                </div>
+                <span class="mt-2 font-bold text-slate-700 text-sm">المادة C</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
+                    <div id="liquid-d-ind" class="absolute bottom-0 w-full h-16 bg-slate-200/50 transition-colors duration-1000"></div>
+                </div>
+                <span class="mt-2 font-bold text-slate-700 text-sm">المادة D</span>
+            </div>
+        </div>
+
+        <div class="flex justify-center mt-auto">
+            <button id="btn-indicator" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-xl shadow-md transition-transform transform hover:scale-105">
+                إضافة عصير الملفوف
+            </button>
+        </div>
+        <p id="fb-ind" class="mt-4 text-center text-sm font-medium text-purple-800 min-h-[40px]"></p>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg shadow border-t-4 border-sky-400 flex flex-col">
+        <h2 class="text-lg font-semibold mb-4 text-sky-800 text-center">التجربة 2: إضافة حمض (HCl)</h2>
+        <p class="text-lg text-teal-800 font-bold mt-2 mb-6 text-center bg-teal-50 py-2 rounded-lg border border-teal-200 shadow-sm">💡 ملاحظة: تم استخدام عينات جديدة من المحاليل (بدون كاشف) لفحص انبعاث الغاز.</p>        
+        <div class="flex justify-center gap-4 sm:gap-8 items-end h-32 mb-6 border-b-4 border-slate-300 pb-2">
+            <div class="flex flex-col items-center">
+                <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
+                    <div class="absolute bottom-0 w-full h-16 bg-slate-200/50"></div>
+                    <div id="bubbles-a-acid" class="absolute bottom-0 w-full h-full pointer-events-none"></div>
+                </div>
+                <span class="mt-2 font-bold text-slate-700 text-sm">المادة A</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
+                    <div class="absolute bottom-0 w-full h-16 bg-slate-200/50"></div>
+                    <div id="bubbles-b-acid" class="absolute bottom-0 w-full h-full pointer-events-none"></div>
+                </div>
+                <span class="mt-2 font-bold text-slate-700 text-sm">المادة B</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
+                    <div class="absolute bottom-0 w-full h-16 bg-slate-200/50"></div>
+                    <div id="bubbles-c-acid" class="absolute bottom-0 w-full h-full pointer-events-none"></div>
+                </div>
+                <span class="mt-2 font-bold text-slate-700 text-sm">المادة C</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="relative w-12 sm:w-16 h-24 border-4 border-t-0 border-white/50 bg-slate-100 rounded-b-xl overflow-hidden shadow-[inset_0_-2px_6px_rgba(0,0,0,0.1)] ring-2 ring-slate-300">
+                    <div class="absolute bottom-0 w-full h-16 bg-slate-200/50"></div>
+                    <div id="bubbles-d-acid" class="absolute bottom-0 w-full h-full pointer-events-none"></div>
+                </div>
+                <span class="mt-2 font-bold text-slate-700 text-sm">المادة D</span>
+            </div>
+        </div>
+
+        <div class="flex justify-center mt-auto">
+            <button id="btn-acid" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-6 rounded-xl shadow-md transition-transform transform hover:scale-105">
+                إضافة حمض (HCl)
+            </button>
+        </div>
+        <p id="fb-acid" class="mt-4 text-center text-sm font-medium text-sky-800 min-h-[40px]"></p>
+    </div>
+
+</div>
+
+<div class="bg-white p-6 rounded-lg shadow mb-6 border-t-4 border-indigo-500">
+    <h2 class="text-xl font-semibold mb-6">حددوا المواد المطابقة للنتائج:</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div>
+            <label class="block mb-2 font-bold text-gray-700">المادة A</label>
+            <select id="sel-a" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow">
+                <option value="">اختر...</option>
+            </select>
+        </div>
+        <div>
+            <label class="block mb-2 font-bold text-gray-700">المادة B</label>
+            <select id="sel-b" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow">
+                <option value="">اختر...</option>
+            </select>
+        </div>
+        <div>
+            <label class="block mb-2 font-bold text-gray-700">المادة C</label>
+            <select id="sel-c" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow">
+                <option value="">اختر...</option>
+            </select>
+        </div>
+        <div>
+            <label class="block mb-2 font-bold text-gray-700">المادة D</label>
+            <select id="sel-d" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow">
+                <option value="">اختر...</option>
+            </select>
+        </div>
+    </div>
+    
+    
+</div>
+
+</div>
+
+[[script type="module"]]
+// 1. Import STACK-JS securely
+import {stack_js} from '[[cors src="stackjsiframe.js"/]]';
+stack_js.resize_containing_frame({#width#}, {#height#});
+
+// 2. Fetch Randomized Variables from Maxima
+const correctAns = {#correct_ans#}; 
+const reactOptions = {#react#}; 
+// الكود الجديد: طباعة المواد بدون علامات تنصيص
+document.getElementById('chem-list').textContent = '( ' + reactOptions.join(' , ') + ' )';
+
+// Helper Function: Classify the chemical (Updated for Unicode strings)
+function getChemProperty(chem) {
+    if(chem.includes("NaHSO₄") || chem.includes("HCl") || chem.includes("HNO₃")) return "acid";
+    if(chem.includes("NaOH") || chem.includes("KOH") || chem.includes("LiOH")) return "sbase";
+    if(chem.includes("NaHCO₃") || chem.includes("Na₂CO₃")) return "carb"; 
+    if(chem.includes("NaCl") || chem.includes("KCl")) return "neutral";
+    return "unknown";
+}
+
+const beakerProps = correctAns.map(getChemProperty);
+const beakerIds = ['a', 'b', 'c', 'd'];
+
+// Dynamically populate the select menus (Simplified!)
+const selectElements = ['sel-a', 'sel-b', 'sel-c', 'sel-d'];
+selectElements.forEach(selId => {
+    const sel = document.getElementById(selId);
+    reactOptions.forEach(opt => {
+        let optionEl = document.createElement('option');
+        optionEl.value = opt; // القيمة التي سترسل لـ STACK
+        optionEl.textContent = opt; // النص النظيف الذي سيراه الطالب
+        sel.appendChild(optionEl);
+    });
+});
+
+// 3. Setup Interactions for Lab
+const btnInd = document.getElementById('btn-indicator');
+const btnAcid = document.getElementById('btn-acid');
+const fbInd = document.getElementById('fb-ind');
+const fbAcid = document.getElementById('fb-acid');
+
+// Indicator Experiment
+if(btnInd) {
+    btnInd.addEventListener('click', () => {
+        beakerIds.forEach((id, index) => {
+            const prop = beakerProps[index];
+            let colorClass = "";
+            
+            // Assign color based on property
+            if (prop === "neutral") colorClass = "bg-purple-600 opacity-90";
+            else if (prop === "carb") colorClass = "bg-blue-500 opacity-90";
+            else if (prop === "acid") colorClass = "bg-red-600 opacity-90";
+            else if (prop === "sbase") colorClass = "bg-yellow-400 opacity-90";
+            
+            document.getElementById(`liquid-${id}-ind`).className = `absolute bottom-0 w-full h-16 transition-colors duration-1000 ${colorClass}`;
+        });
+        
+        fbInd.textContent = "تمت إضافة الكاشف. انتبهوا لتغير ألوان المحاليل وقارنوها بدليل الـ pH للملفوف الأحمر.";
+        fbInd.className = "mt-4 text-center text-sm font-bold text-purple-800 min-h-[40px] fade-in";
+    });
+}
+
+// Acid Experiment
+if(btnAcid) {
+    btnAcid.addEventListener('click', () => {
+        let bubbled = false;
+        
+        beakerIds.forEach((id, index) => {
+            const container = document.getElementById(`bubbles-${id}-acid`);
+            container.innerHTML = ''; 
+            
+            // Only carbonate releases gas with acid
+            if(beakerProps[index] === "carb") {
+                bubbled = true;
+                for(let i=0; i<20; i++) {
+                    setTimeout(() => {
+                        const bubble = document.createElement('div');
+                        bubble.className = 'bubble';
+                        bubble.style.width = Math.random() * 8 + 4 + 'px';
+                        bubble.style.height = bubble.style.width;
+                        bubble.style.left = Math.random() * 70 + 15 + '%';
+                        bubble.style.animationDuration = Math.random() * 1 + 1 + 's';
+                        container.appendChild(bubble);
+                    }, i * 80);
+                }
+            }
+        });
+
+        fbAcid.textContent = "تمت إضافة حمض HCl. النتيجة: انبعاث فقاعات غاز CO₂ في المادة التي تحتوي على كربونات.";
+        fbAcid.className = "mt-4 text-center text-sm font-bold text-sky-800 min-h-[40px] fade-in";
+        
+       
+    });
+}
+
+// 4. Connect to STACK and handle automatic updates
+var promiseforaninput = stack_js.request_access_to_input("ans1", true);
+
+promiseforaninput.then((id) => {
+    let stackInput = document.getElementById(id);
+
+    // --- Load previous answer and visually update lab ---
+    if (stackInput.value && stackInput.value.trim() !== "") {
+        try {
+            let prev = JSON.parse(stackInput.value); 
+            
+            // NEW: The array now has 5 items: [Score, AnsA, AnsB, AnsC, AnsD]
+            if (Array.isArray(prev) && prev.length === 5) {
+                document.getElementById('sel-a').value = prev[1];
+                document.getElementById('sel-b').value = prev[2];
+                document.getElementById('sel-c').value = prev[3];
+                document.getElementById('sel-d').value = prev[4];
+
+                // Auto-run the experiments to show the saved visual state
+                const btnInd = document.getElementById('btn-indicator');
+                const btnAcid = document.getElementById('btn-acid');
+                if (btnInd) btnInd.click();
+                if (btnAcid) btnAcid.click();
+            }
+        } catch (e) {
+            console.warn("Could not parse previous answer from STACK.", e);
+        }
+    }
+
+// --- NEW: Visual Grading if Input is Inactive (Submitted) ---
+    // Moodle/STACK sets the input to readonly/disabled when the question is graded
+    if (stackInput.readOnly || stackInput.disabled) {
+        const selectIds = ['sel-a', 'sel-b', 'sel-c', 'sel-d'];
+        
+        selectIds.forEach((selectId, index) => {
+            let sel = document.getElementById(selectId);
+            sel.disabled = true; // Lock the dropdown so student can't change it
+            
+            // Grab the label element that sits right above the select menu
+            let label = sel.previousElementSibling;
+
+            // Compare student's selection to the Maxima correctAns array
+            if (sel.value === correctAns[index]) {
+                // Correct: Add a green checkmark next to the label
+                label.innerHTML += ' <span class="text-green-600 text-xl font-extrabold pr-2">✅</span>';
+                sel.style.borderColor = "#22c55e"; // Keep a subtle green border (optional)
+            } else {
+                // Incorrect: Add a red X next to the label
+                label.innerHTML += ' <span class="text-red-600 text-xl font-extrabold pr-2">❌</span>';
+                sel.style.borderColor = "#ef4444"; // Keep a subtle red border (optional)
+            }
+        });
+    }
+
+    // --- NEW: Function to automatically calculate grade and update STACK ---
+    function updateStackInput() {
+        const selectIds = ['sel-a', 'sel-b', 'sel-c', 'sel-d'];
+        let vals = [];
+        let score = 0;
+
+        selectIds.forEach((selectId, index) => {
+            let val = document.getElementById(selectId).value;
+            vals.push(val);
+            
+            // Calculate grade locally: +0.25 for each correct answer
+            if (val === correctAns[index]) {
+                score += 0.25;
+            }
+        });
+        
+        // Send data to STACK: [Grade, AnsA, AnsB, AnsC, AnsD]
+        // Example: [0.75, "NaCl", "NaOH", "NaHCO3", "NaHSO4"]
+        let maximaList = JSON.stringify([score, ...vals]);
+        stackInput.value = maximaList;
+        
+        // Force Moodle to recognise the input change
+        stackInput.dispatchEvent(new Event('change'));
+    }
+
+    // Attach event listeners to all dropdowns to trigger the update on any change
+    const selectIds = ['sel-a', 'sel-b', 'sel-c', 'sel-d'];
+    selectIds.forEach(selectId => {
+        // Only attach listeners if the question is still active
+        if (!stackInput.readOnly && !stackInput.disabled) {
+            document.getElementById(selectId).addEventListener('change', updateStackInput);
+        }
+    });
+});
+[[/script]]
+[[/iframe]]
